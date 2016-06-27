@@ -3,6 +3,7 @@ package tests;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import debug.Library;
 
 public class Resident{
   private String name;
@@ -11,13 +12,17 @@ public class Resident{
 
   private String fileDescriptorName;
   private FileReader fileDescriptor;
+
   /**
    * Empty constructor
    */
+   @Deprecated
   Resident(){ }
 
   Resident(File resInfo){
     this.fileDescriptorName = resInfo.getName();
+    Library.echo(this.getClass().toString(), "Resident", this.fileDescriptorName);
+    String values[] = this.fileDescriptor.
     try{
       this.fileDescriptor = new FileReader(resInfo);
     }catch(FileNotFoundException ex){
