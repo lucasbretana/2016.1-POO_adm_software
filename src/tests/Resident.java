@@ -3,14 +3,10 @@ package tests;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-<<<<<<< HEAD
 import java.io.IOException;
 import java.util.Scanner;
-=======
->>>>>>> 5ab43174b375bd0b48d2883dd98347afa754eac3
-import debug.Library;
 
-public class Resident{
+public class Resident implements ReadAble, Writeable{
   private String name;
   private boolean garage;
   private int apartment;
@@ -31,13 +27,17 @@ public class Resident{
       this.fileDescriptor = new FileReader(resInfo);
       in = new Scanner(this.fileDescriptor);
       while(in.hasNextLine()){
-        Library.echo(in.nextLine());
+        String a[] = in.nextLine().split(AP);
+        // System.out.println(in.nextLine());
+        for(String i : a) 
+          System.out.println(i.trim());
       }
     }catch(FileNotFoundException fileEx){
       System.err.println("The file " + this.fileDescriptorName + " was not found on " + resInfo.getAbsolutePath() + "!");
       fileEx.printStackTrace();
     }finally{
-
+      in = null;
+      System.gc();
     }
   }
 
@@ -55,7 +55,7 @@ public class Resident{
    */
   private void setName(String newName){
     if(!newName.trim().equalsIgnoreCase(""))
-      throw new IllegalArgumentException("Name cannot be NULL");
+      throw new IllegalArgumentException("Name cannot be NULL!");
     this.name = newName;
   }
 

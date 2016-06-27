@@ -2,7 +2,7 @@ package tests;
 
 import java.io.FileReader;
 import java.io.File;
-import debug.Library;
+// import debug.Library;
 
 /**
  * Used only to run some tests, do not implement real code in here
@@ -14,7 +14,7 @@ public class Main{
 	 *               					1 - the Residet file name
 	 * */
 	public static void main(String []args){
-    Library.makeStart(args);
+    // Library.makeStart(args);
 		Resident fulano = new Resident(new File(args[1]));
 	}
 }
