@@ -3,8 +3,11 @@ package tests;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.Scanner;
+=======
+>>>>>>> 5ab43174b375bd0b48d2883dd98347afa754eac3
 import debug.Library;
 
 public class Resident{
@@ -14,9 +17,11 @@ public class Resident{
 
   private String fileDescriptorName;
   private FileReader fileDescriptor;
+
   /**
    * Empty constructor
    */
+   @Deprecated
   Resident(){ }
 
   Resident(File resInfo){
