@@ -3,6 +3,9 @@ package tests;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import debug.Library;
 
 public class Resident{
   private String name;
@@ -18,11 +21,18 @@ public class Resident{
 
   Resident(File resInfo){
     this.fileDescriptorName = resInfo.getName();
+    Scanner in;
     try{
       this.fileDescriptor = new FileReader(resInfo);
-    }catch(FileNotFoundException ex){
+      in = new Scanner(this.fileDescriptor);
+      while(in.hasNextLine()){
+        Library.echo(in.nextLine());
+      }
+    }catch(FileNotFoundException fileEx){
       System.err.println("The file " + this.fileDescriptorName + " was not found on " + resInfo.getAbsolutePath() + "!");
-      ex.printStackTrace();
+      fileEx.printStackTrace();
+    }finally{
+
     }
   }
 
