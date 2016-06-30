@@ -26,6 +26,7 @@ public class Resident extends Taxpayer implements IOResident{
 
     String line = null;
     try(BufferedReader in = new BufferedReader(new FileReader(desc))){
+      this.building = b;
       in.mark(1);
       line = in.readLine();
       line = line.replaceFirst(IOResident.APARTMENT, " ");
@@ -61,7 +62,18 @@ public class Resident extends Taxpayer implements IOResident{
  * @param  b          the conjunt of bills that has to be paid
  */
   public void chargeBill(BillPerApartment b){
-    System.out.println("I'm " + this.getName().split(" ")[0] + ", \tand I receive my bill on total of " + String.format( "%.2f", b.getTotal()) + " from month " + b.getMonth() + " on apartment " + this.getApartment() + ((this.hasGarage()) ? "\t with\t" : "\t without") + " \tgarage!");
+    // System.out.println("I'm " + this.getName().split(" ")[0] + ", \tand I receive my bill on total of " + String.format( "%.2f", b.getTotal()) + " from month " + b.getMonth() + "\ton apartment " + this.getApartment() + ((this.hasGarage()) ? "\t with\t" : "\t without") + " \tgarage!");
+    System.out.println("################################################################################");
+    System.out.println("###\t### " + this.getName().split(" ")[0].toUpperCase() + " on " + this.getApartment() + " ###\t###");
+    System.out.println("###\t### " + b.getMonth().toUpperCase());
+    System.out.println("########");
+    System.out.println("Building total is: \tR$\t" + String.format("%.2f", b.getFullTotal()));
+    System.out.println("Apartments: \t\t" + this.building.getNumOccupiedApartments() + " / "+ this.building.getTotalApartments());
+    System.out.println("Admin: \t\t\t+ R$\t" + String.format("%.2f", b.getAdmin()));
+    System.out.println("Garage: \t\t+ R$\t" + String.format("%.2f", b.getGarage()));
+    System.out.println("########\t\t _____________");
+    System.out.println("TOTAL: \t\t\t= R$\t" + String.format( "%.2f", b.getTotal()));
+    System.out.println("################################################################################");
   }
 
 	/**
@@ -77,7 +89,7 @@ public class Resident extends Taxpayer implements IOResident{
    * @method getApartmentFromFile
    * @return the number of the apartment from the file
    */
-  public Integer getApartmentFromFile(){
+  private Integer getApartmentFromFile(){
     String line;
     try(BufferedReader in = new BufferedReader(new FileReader(this.description))){
       in.mark(1);
@@ -124,7 +136,7 @@ public class Resident extends Taxpayer implements IOResident{
    * @method getNameFromFile
    * @return the name of the resident
    */
-  public String getNameFromFile(){
+  private String getNameFromFile(){
     String line = null;
     try(BufferedReader in = new BufferedReader(new FileReader(this.description))){
       in.mark(1);
@@ -174,7 +186,7 @@ public class Resident extends Taxpayer implements IOResident{
    * @method hasGarageFromFile
    * @return the boolean information saying if this resident has a garage
    */
-  public Boolean hasGarageFromFile(){
+  private Boolean hasGarageFromFile(){
     String line;
     try(BufferedReader in = new BufferedReader(new FileReader(this.description))){
       in.mark(1);
@@ -225,4 +237,5 @@ public class Resident extends Taxpayer implements IOResident{
 	public void setDescription(File description) {
 		this.description = description;
 	}
+
 }

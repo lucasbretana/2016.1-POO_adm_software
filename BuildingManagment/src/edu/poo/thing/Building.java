@@ -1,8 +1,13 @@
 package edu.poo.thing;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.io.BufferedWriter;
+import java.util.List;
 public class Building{
   private String name = "Casa do caralho!";
   private short nFloors = 5;
@@ -38,6 +43,10 @@ public class Building{
 
   public Short getNumOccupiedApartments(){
     return this.numOccupiedApartments;
+  }
+
+  public Short getTotalApartments(){
+    return new Integer(this.nFloors * this.nAparAndar).shortValue();
   }
 
   /**
@@ -80,14 +89,43 @@ public class Building{
     for(int i=0 ; i<nFloors ; i++)
       Arrays.stream(this.listOfApartments[i]).filter(a -> a != null).forEach(a ->{
         BillPerApartment b = new BillPerApartment(bill, a);
-        this.totInc += b.getTotal();
-        this.totOut += bill.getSum();
         a.getListResidents().forEach(r -> r.chargeBill(b));
+        this.totInc += b.getTotal();
       });
+    this.totOut += bill.getSum();
+    this.doAccount(bill);
   }
 
-  // private void doAccount(Bill b){
-  //   Double in = b.getSum() + b.getAdmin();
-  // }
+  public String listResidents(short floor){
+    String list = "";
+    for(Apartment ap : this.listOfApartments[floor])
+      if(ap != null)
+      // for(Resident r : ap.getListResidents())
+      //   if(r != null)
+          String.join(ap.getListResidents().toArray(), ",");
+          // list += r.getName() + ", ";
+
+    // Arrays.stream(this.listOfApartments[floor]).filter(a -> a != null).forEach(a -> a.getListResidents().stream().forEach(r -> System.out.print(r.getName() + ", ")));
+    // List<String> list = Arrays.stream(this.listOfApartments[floor]).filter(a -> a != null).forEach(a -> a.getListResidents().map(r -> r.getName()));
+
+    // System.out.print(" here on " + String.joind(Arrays.stream(this.listOfApartments[floor]).filter(a -> a != null).forEach(a -> a.getListResidents()), ",") + "");
+    return null;
+  }
+
+  private void doAccount(Bill b){
+    // System.out.println("R$ " + String.format("%.2f", this.totInc - this.totOut) + "");
+    try(BufferedWriter accountFile = new BufferedWriter(new FileWriter(new File(b.getMonth())))){
+      accountFile.write(b.getMonth().toUpperCase() + "\n");
+      accountFile.write("Inc:\t ++ R$\t" + String.format("%.2f", this.totInc) + "\n");
+      accountFile.write("Out:\t -- R$\t" + String.format("%.2f", this.totOut) + "\n");
+      accountFile.write("Pro:\t == R$\t" + String.format("%.2f", this.totInc - this.totOut) + "\n");
+      this.totInc = this.totOut = new Double(0);
+    }catch(IOException ioEx){
+      System.out.println("Could not create the file " + b.getMonth());
+      ioEx.printStackTrace();
+    }finally{
+      System.gc();
+    }
+  }
 
 }

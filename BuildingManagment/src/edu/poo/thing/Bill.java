@@ -152,6 +152,10 @@ public class Bill implements IOBill{
 		return admin;
 	}
 
+  /**
+   * Sums up all the taxes for this month
+   * @return the sum os taxes for this month
+   */
   public Double getSum(){
     return new Double(this.water + this.energy + this.gas + this.lobby);
   }

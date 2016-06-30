@@ -5,11 +5,17 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class BillPerApartment{
+  private Double garage = new Double(0);
   private Bill base = null;
   private Apartment place = null;
+
   public BillPerApartment(Bill b, Apartment a){
     this.base = b;
     this.place = a;
+  }
+
+  public Double getGarage(){
+    return (this.place.getListResidents().stream().filter((r)->r.hasGarage()).toArray().length > 0) ? new Double(this.getAdmin() * 0.4) : new Double(0);
   }
 
   /**
@@ -59,11 +65,24 @@ public class BillPerApartment{
     return new Double(this.getSum() * 0.1).floatValue();
   }
 
+  /**
+   * Sums up all the bills, for this apartment
+   * @return a sum of the bills, without the admin neither the garage taxes
+   * @see getTotal
+   */
   private Double getSum(){
-    return new Double((this.getWater() + this.getEnergy() + this.getGas() + this.getLobby()) / this.place.getBuilding().getNumOccupiedApartments());
+    return new Double(this.base.getSum() / this.place.getBuilding().getNumOccupiedApartments());
   }
 
+  /**
+   * Sums up all the taxes. including admin and garage, is applicable, taxes
+   * @return the total of taxes for this apartment
+   */
   public Double getTotal(){
-    return (this.place.getListResidents().stream().filter((r)->r.hasGarage()).toArray().length > 0) ? new Double(this.getSum() + this.getAdmin() + (this.getAdmin() * 0.4)) : this.getSum() + this.getAdmin();
+    return getSum() + getAdmin() + getGarage();
+  }
+
+  public Double getFullTotal(){
+    return this.base.getSum();
   }
 }

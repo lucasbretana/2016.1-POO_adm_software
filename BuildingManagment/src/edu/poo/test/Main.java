@@ -16,5 +16,7 @@ public class Main{
     b.sendBill(new Bill(new File(args[6])));
     b.sendBill(new Bill(new File(args[7])));
     b.sendBill(new Bill(new File(args[8])));
+
+    b.listResidents((short)0);
   }
 }
