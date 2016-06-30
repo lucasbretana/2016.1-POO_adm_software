@@ -1,4 +1,4 @@
-package thing;
+package edu.poo.thing;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,11 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Resident implements IOResident{
+public class Resident extends Taxpayer implements IOResident{
   private Integer apartment;
   private String name;
   private Boolean garage;
   private File description = null;
+  private Building building = null;
 
 /**
  * Constructor method, creates a resident using the information from a file
@@ -18,18 +19,17 @@ public class Resident implements IOResident{
  * @param  desc     file that contains the resident information
  * @return          a instance of Resident class
  */
-  public Resident(File desc) throws IllegalArgumentException{
-
+  public Resident(File desc, Building b) throws IllegalArgumentException, NullPointerException{
     if( desc == null ) throw new IllegalArgumentException("The file used to create a resident is not valid!");
+    if( b == null ) throw new NullPointerException("I cannot live in a null building!");
     this.description = desc;
 
-    String line;
+    String line = null;
     try(BufferedReader in = new BufferedReader(new FileReader(desc))){
       in.mark(1);
       line = in.readLine();
       line = line.replaceFirst(IOResident.APARTMENT, " ");
       this.apartment = Integer.parseInt(line.trim());
-
 
       line = in.readLine();
       line = line.replaceFirst(IOResident.NAME, " ");
@@ -47,11 +47,21 @@ public class Resident implements IOResident{
       // erro ao ler do arquivo
       ioExc.printStackTrace();
     }catch(NumberFormatException numEx){
+      System.out.println("There was come problem with the file " + this.description.getName() + " that descrives the resident!\nThe \"" + line.toString() + "\" is not a valid apartment number!");
       numEx.printStackTrace();
     }finally{
       line = null;
       System.gc();
     }
+  }
+
+/**
+ * Tell this resident about a new conjunt of bill that has to be paid
+ * @method charge
+ * @param  b          the conjunt of bills that has to be paid
+ */
+  public void chargeBill(BillPerApartment b){
+    System.out.println("I'm " + this.getName().split(" ")[0] + ", \tand I receive my bill on total of " + String.format( "%.2f", b.getTotal()) + " from month " + b.getMonth() + " on apartment " + this.getApartment() + ((this.hasGarage()) ? "\t with\t" : "\t without") + " \tgarage!");
   }
 
 	/**
@@ -63,9 +73,9 @@ public class Resident implements IOResident{
 	}
 
   /**
-   * Returns the value of apartment that is in the file
+   * Returns the value of apartment that is in the file and reload information to the instance
    * @method getApartmentFromFile
-   * @return [description]
+   * @return the number of the apartment from the file
    */
   public Integer getApartmentFromFile(){
     String line;

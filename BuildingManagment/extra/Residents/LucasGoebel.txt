@@ -1,0 +1,3 @@
+Apartamento: 303
+Nome do Proprietário: Lucas Almeida Goebel Assunção
+Garagem: Sim

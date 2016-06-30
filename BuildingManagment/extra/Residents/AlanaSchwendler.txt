@@ -1,0 +1,3 @@
+Apartamento: 401
+Nome do Proprietário: Alana Schwendler
+Garagem: Sim

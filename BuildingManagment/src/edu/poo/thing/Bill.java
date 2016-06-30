@@ -1,4 +1,4 @@
-package thing;
+package edu.poo.thing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +44,7 @@ public class Bill implements IOBill{
       line = in.readLine();
       this.lobby = Float.parseFloat(line.replaceFirst(IOBill.LOBBY, " ").trim().replaceAll(",", "."));
 
-      this.admin = new Double((this.water + this.energy + this.gas + this.lobby) * 0.1).floatValue();
+      this.admin = getSum().floatValue();
 
       in.reset();
     }catch(FileNotFoundException fileEx){
@@ -92,33 +92,31 @@ public class Bill implements IOBill{
   }
 
   /**
-   *
    * @method getEnergy
-   * @return [description]
+   * @return energy bill value
    */
   public Float getEnergy(){
     return this.energy;
   }
 
 	/**
-	* Sets new value of water
-	* @param
+	* Sets new value of water bill
+	* @param the nem water bill value
 	*/
 	public void setWater(Float water) {
 		this.water = water;
 	}
 
 	/**
-	* Sets new value of energy
-	* @param
+	* Sets new value of energy bill
+	* @param the new value for energy
 	*/
 	public void setEnergy(Float energy) {
 		this.energy = energy;
 	}
 
 	/**
-	* Returns value of gas
-	* @return
+	* @return value of gas bill
 	*/
 	public Float getGas() {
 		return gas;
@@ -126,15 +124,14 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of gas
-	* @param
+	* @param the new value of gas bill
 	*/
 	public void setGas(Float gas) {
 		this.gas = gas;
 	}
 
 	/**
-	* Returns value of lobby
-	* @return
+	* @return value of lobby bill
 	*/
 	public Float getLobby() {
 		return lobby;
@@ -142,41 +139,35 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of lobby
-	* @param
+	* @param the lobby bill value
 	*/
 	public void setLobby(Float lobby) {
 		this.lobby = lobby;
 	}
 
 	/**
-	* Returns value of admin
-	* @return
+	* @return value of admin bill
 	*/
 	public Float getAdmin() {
 		return admin;
 	}
 
+  public Double getSum(){
+    return new Double(this.water + this.energy + this.gas + this.lobby);
+  }
+
 	/**
-	* Sets new value of admin
-	* @param
+	* Sets new value of admin, is calculated using all others bills information
 	*/
-	public void setAdmin(Float admin) {
-		this.admin = new Double((this.water + this.energy + this.gas + this.lobby) * 0.1).floatValue();
+	public void setAdmin() {
+		this.admin = getSum().floatValue();
 	}
 
 	/**
-	* Returns value of description
-	* @return
+	* Returns value of description, withc is the file that descrives this bill
+	* @return a File object, with bill data
 	*/
 	public File getDescription() {
 		return description;
-	}
-
-	/**
-	* Sets new value of description
-	* @param
-	*/
-	public void setDescription(File description) {
-		this.description = description;
 	}
 }
