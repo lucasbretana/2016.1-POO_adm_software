@@ -1,5 +1,6 @@
-package edu.poo.thing;
+package edu.poo.build;
 
+import edu.poo.person.Resident;
 import java.util.ArrayList;
 import java.util.Arrays;
 

@@ -2,6 +2,7 @@
 # Final work for POO
 
 # TODO
+  - compare and sort the months with the incomings
  --------------------------------------------------------------------------------
 # FOLDERS in root directory
   - src

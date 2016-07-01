@@ -1,11 +1,13 @@
 package edu.poo.test;
 
+import edu.poo.build.Building;
+import edu.poo.person.Resident;
+import edu.poo.economics.Bill;
 import java.io.File;
-import edu.poo.thing.*;
 
 public class Main{
   public static void main(String []args){
-    Building b = new Building();
+    Building b = new Building("Por do Sol", new File("AllAccount"));
     b.addResident(new Resident(new File(args[0]), b));
     b.addResident(new Resident(new File(args[1]), b));
     b.addResident(new Resident(new File(args[2]), b));
@@ -17,6 +19,6 @@ public class Main{
     b.sendBill(new Bill(new File(args[7])));
     b.sendBill(new Bill(new File(args[8])));
 
-    b.listResidents((short)0);
+    System.out.println(b.listResidents((short)1));
   }
 }

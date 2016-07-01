@@ -1,4 +1,4 @@
-package edu.poo.thing;
+package edu.poo.person;
 
 public interface IOResident{
   /**	Is the string that define the line of the number of the apartment */

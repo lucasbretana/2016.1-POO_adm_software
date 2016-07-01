@@ -1,5 +1,7 @@
-package edu.poo.thing;
+package edu.poo.person;
 
+import edu.poo.build.Building;
+import edu.poo.economics.BillPerApartment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

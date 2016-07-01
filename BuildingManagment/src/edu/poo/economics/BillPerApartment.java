@@ -1,5 +1,7 @@
-package edu.poo.thing;
+package edu.poo.economics;
 
+import edu.poo.build.Building;
+import edu.poo.build.Apartment;
 import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Stream;

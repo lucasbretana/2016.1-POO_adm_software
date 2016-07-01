@@ -1,4 +1,4 @@
-package edu.poo.thing;
+package edu.poo.economics;
 
 public interface IOBill{
   public final static String MONTH = "Mês: ";
