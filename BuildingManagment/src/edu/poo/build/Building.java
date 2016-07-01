@@ -4,14 +4,16 @@ import edu.poo.person.Resident;
 import edu.poo.economics.BillPerApartment;
 import edu.poo.economics.Bill;
 import edu.poo.util.MyString;
-import java.io.BufferedWriter;
+import edu.poo.util.Tuple;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.FileReader;
 import java.io.BufferedWriter;
-import java.util.List;
+import java.io.BufferedReader;
 
 public class Building{
   private String name = "Casa do caralho!";
@@ -168,17 +170,17 @@ public class Building{
 
     ArrayList<Tuple<String,Float>> months = new ArrayList<Tuple<String,Float>>();
 
+    String line;
+    String num;
+    String month;
+    Float number;
     try(BufferedReader accountFile = new BufferedReader(new FileReader(this.monthlyBillFile))){
-      String line;
-      String num;
-      String month;
-      Float num;
-      while(accountFile.hasNext()){
-        line = accountFile.read();
+      while((line = accountFile.readLine()).equalsIgnoreCase("")){
+        // line = accountFile.readLine();
         num = line = line.trim().split(":")[1];
         month = line = line.trim().split(":")[0];
-        number = Float.parseFloat(num.trim().replaceFirst("R\\$"));
-        months.add(month, number);
+        number = Float.parseFloat(num.trim().replaceFirst("R\\$", ""));
+        months.add(new <String,Float>Tuple(month, number));
       }
     }catch(IOException ioEx){
       System.out.println("Could not create the file " + this.monthlyBillFile.getName());
@@ -188,11 +190,10 @@ public class Building{
       num = null;
       month = null;
       num = null;
-
       System.gc();
     }
 
-    month.sort();
+    Arrays.sort(months.toArray());
 
     try(BufferedWriter accountFile = new BufferedWriter(new FileWriter(this.monthlyBillFile))){
       accountFile.write(b.getMonth().toUpperCase() + " : R$ " + String.format("%.2f", this.totInc) + "\n");
