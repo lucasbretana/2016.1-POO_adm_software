@@ -201,7 +201,7 @@ public class Building implements IOAble{
     if(s.getStr().length() > 0){
       s.setStr(s.getStr().trim().substring(0, s.getStr().trim().length() - 1));
     }else{
-      System.out.println("There are no residents on the floor " + floor + "!");
+      System.out.println("There are no residents on the floor " + (floor + 1) + "!");
     }
 
     return s.getStr();
