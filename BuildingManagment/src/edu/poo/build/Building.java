@@ -138,6 +138,7 @@ public class Building implements IOAble{
       throw new RemoveException("Could not remove the resident " + res.getName() + " from the apartment " + res.getApartment());
 
     if(this.listOfApartments[floor][num].getListResidents().size() == 0){
+      this.numOccupiedApartments--;
       this.listOfApartments[floor][num].setListResidents(null);
       this.listOfApartments[floor][num] = null;
     }
@@ -157,8 +158,9 @@ public class Building implements IOAble{
     --floor;
     --num;
 
-    if(this.listOfApartments[floor][num] == null)
+    if(this.listOfApartments[floor][num] == null){
       addApartment(floor, num, res);
+    }
     else
       this.listOfApartments[floor][num].addResident(res);
   }
