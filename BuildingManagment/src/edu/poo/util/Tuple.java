@@ -2,7 +2,7 @@ package edu.poo.util;
 
 import java.util.ArrayList;
 
-public class Tuple<T, E extends Comparable<E>> implements Comparable<E>{
+public class Tuple<T, E extends Comparable<E>> implements Comparable<Tuple<T,E>>{
   private T t;
   private E e;
 
@@ -36,8 +36,8 @@ public class Tuple<T, E extends Comparable<E>> implements Comparable<E>{
   }
 
   @Override
-  int compareTo(E e){
-    return this.getE().compareTo(e);
+  public int compareTo(Tuple<T,E> tup){
+    return this.getE().compareTo(tup.getE());
   }
 
 	/**

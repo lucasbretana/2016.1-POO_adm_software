@@ -10,6 +10,10 @@ final public class MyString{
     return this.str;
   }
 
+  public void setStr(String s){
+    this.str = s;
+  }
+
   public void concat(String s){
     this.str = this.str.concat(s);
   }

@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Resident extends Taxpayer implements IOResident{
-  private Integer apartment;
+  private Short apartment;
   private String name;
   private Boolean garage;
   private File description = null;
@@ -22,8 +22,10 @@ public class Resident extends Taxpayer implements IOResident{
  * @return          a instance of Resident class
  */
   public Resident(File desc, Building b) throws IllegalArgumentException, NullPointerException{
-    if( desc == null ) throw new IllegalArgumentException("The file used to create a resident is not valid!");
+    if( desc == null ) throw new NullPointerException("The file used to create a resident is null!");
     if( b == null ) throw new NullPointerException("I cannot live in a null building!");
+
+    if(!desc.exists()) throw new IllegalArgumentException("The file used to create a resident does not exists!");
     this.description = desc;
 
     String line = null;
@@ -32,7 +34,7 @@ public class Resident extends Taxpayer implements IOResident{
       in.mark(1);
       line = in.readLine();
       line = line.replaceFirst(IOResident.APARTMENT, " ");
-      this.apartment = Integer.parseInt(line.trim());
+      this.apartment = Short.parseShort(line.trim());
 
       line = in.readLine();
       line = line.replaceFirst(IOResident.NAME, " ");
@@ -82,7 +84,7 @@ public class Resident extends Taxpayer implements IOResident{
 	* Returns value of apartment
 	* @return
 	*/
-	public Integer getApartment() {
+	public Short getApartment() {
 		return apartment;
 	}
 
@@ -91,14 +93,14 @@ public class Resident extends Taxpayer implements IOResident{
    * @method getApartmentFromFile
    * @return the number of the apartment from the file
    */
-  private Integer getApartmentFromFile(){
+  private Short getApartmentFromFile(){
     String line;
     try(BufferedReader in = new BufferedReader(new FileReader(this.description))){
       in.mark(1);
 
       line = in.readLine();
       line = line.replaceFirst(IOResident.APARTMENT, " ");
-      this.apartment = Integer.parseInt(line.trim());
+      this.apartment = Short.parseShort(line.trim());
 
       in.reset();
     }catch(FileNotFoundException fileExc){
@@ -121,7 +123,7 @@ public class Resident extends Taxpayer implements IOResident{
 	* Sets new value of apartment
 	* @param
 	*/
-	public void setApartment(Integer apartment) {
+	public void setApartment(Short apartment) {
 		this.apartment = apartment;
 	}
 

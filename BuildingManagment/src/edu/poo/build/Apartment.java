@@ -34,18 +34,4 @@ public class Apartment{
   public void setListResidents(ArrayList<Resident> newList){
     this.listOfResidents = newList;
   }
-
-  // @Override
-  // public String toString(){
-  //   String list = new String("");
-  //   // this.listOfResidents.stream().filter(r -> r != null).forEach(r -> {
-  //   //   String aa = new String(r.getName());
-  //   //   list += aa;
-  //   // });
-  //   for(Resident r : this.listOfResidents){
-  //     list += (r != null) ? r.getName() + ", " : "";
-  //   }
-  //   list.toCharArray()[list.lastIndexOf(",")] = " ".toCharArray()[0];
-  //   return new String(list).trim();
-  // }
 }

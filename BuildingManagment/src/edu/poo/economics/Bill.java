@@ -27,6 +27,8 @@ public class Bill implements IOBill{
     if( desc == null ) throw new IllegalArgumentException("The file used to create a resident is not valid!");
     this.description = desc;
 
+    if(!desc.exists()) throw new IllegalArgumentException("The file " + desc.getName() + " does not exists!");
+
     String line;
     try(BufferedReader in = new BufferedReader(new FileReader(desc))){
       in.mark(1);
