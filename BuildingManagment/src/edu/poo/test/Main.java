@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Main{
+  private static Scanner entry = new Scanner(System.in);
   public static void main(String []args){
     int op = 5;
     Building b = new Building("Por do Sol", new File(IOAble.LOCATION + "AllAccount" + IOAble.EXTENSION));
@@ -23,7 +24,9 @@ public class Main{
       System.out.println("4 -- Listar moradores por apartmento");
       System.out.println("5 -- Listar moradores com garagem");
       System.out.println("6 -- Nova conta");
+
       op = entry.nextInt();
+
       switch (op) {
         case 1: addResident(b);
         break;
@@ -38,6 +41,7 @@ public class Main{
         case 6: chargeBill(b);
         break;
         case 0: {
+          // entry.nextLine();
           System.gc();
           System.exit(0);
         }
@@ -49,12 +53,11 @@ public class Main{
   }
 
   protected static void addResident(Building b){
-    Scanner s = new Scanner(System.in);
     Resident res = null;
     String f = null;
     while((f == null) || (f.equalsIgnoreCase(""))){
       System.out.println("Digite o arquivo do residente a ser incluido: ");
-      f = s.nextLine();
+      f = entry.nextLine();
     }
     try{
       res = new Resident(new File(IOResident.LOCATION + f + IOAble.EXTENSION), b);
@@ -66,21 +69,18 @@ public class Main{
       System.err.println("The file does not exists!" + ilEx.getMessage().toString());
       addResident(b);
     }finally{
-      s.close();
-      s = null;
       res = null;
       f = null;
     }
   }
 
   protected static void removeResident(Building b){
-    Scanner s = new Scanner(System.in);
     Resident res;
     System.out.println("Digite o arquivo do residente a ser removido: ");
-    String f = s.nextLine();
+    String f = entry.nextLine();
     while((f == null) || (f.equalsIgnoreCase(""))){
       System.out.println("Digite o arquivo do residente a ser removido: ");
-      f = s.nextLine();
+      f = entry.nextLine();
     }
     res = new Resident(new File(IOResident.LOCATION + f + IOAble.EXTENSION), b);
 
@@ -90,42 +90,33 @@ public class Main{
     }catch(RemoveException rmEx){
       System.out.println("This resident cannot be removed!\n" + rmEx.getMessage().toString());
     }finally{
-      s.close();
-      s = null;
       res = null;
-      s = null;
       System.gc();
     }
   }
 
   protected static void listByFloor(Building b){
-    Scanner s = new Scanner(System.in);
     System.out.println("Digite o andar do qual deseja listar os moradores: ");
-    short f = s.nextShort();
+    short f = entry.nextShort();
     try{
       System.out.println(b.listResidentsByFloor(f));
     }catch(IllegalArgumentException ilEx){
       System.err.println("This floor is not valid!" + ilEx.getMessage().toString());
       listByFloor(b);
     }finally{
-      s.close();
-      s = null;
       System.gc();
     }
   }
 
   protected static void listByApartment(Building b){
-    Scanner s = new Scanner(System.in);
     System.out.println("Digite o numero do apartmento a listar os moradores: ");
-    short ap = s.nextShort();
+    short ap = entry.nextShort();
     try{
       System.out.println(b.listResidentsByApartNumber(ap));
     }catch(IllegalArgumentException ilEx){
       System.err.println("This apartmetn number is not valid!\n" + ilEx.getMessage().toString());
       listByApartment(b);
     }finally{
-      s.close();
-      s = null;
       System.gc();
     }
   }
@@ -135,10 +126,9 @@ public class Main{
   }
 
   protected static void chargeBill(Building b){
-    Scanner s = new Scanner(System.in);
     Bill bill;
     System.out.println("Digite o arquivo da conta: ");
-    String a = s.nextLine();
+    String a = entry.nextLine();
     try{
       bill = new Bill(new File(IOBill.LOCATION + a + IOAble.EXTENSION));
       b.sendBill(bill);
@@ -149,8 +139,6 @@ public class Main{
       System.err.println(ilEx.getMessage().toString());
       chargeBill(b);
     }finally{
-      s.close();
-      s = null;
       bill = null;
       a = null;
       System.gc();
