@@ -23,7 +23,7 @@ extra/
     Pasta contendo dados financeiros do prédio.
 
 Get Started:
-java -jar app.jar para executar o programa
+java -jar BuildingManagment.jar para executar o programa
 Uma vez dentro do programa selecione a opção desejada do menu.
   Menu:
     0 -- Sair do programa
