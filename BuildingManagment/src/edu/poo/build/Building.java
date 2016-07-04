@@ -201,7 +201,7 @@ public class Building implements IOAble{
     if(s.getStr().length() > 0){
       s.setStr(s.getStr().trim().substring(0, s.getStr().trim().length() - 1));
     }else{
-      System.out.println("There are no residents on the floor " + (floor + 1) + "!");
+      System.out.println("Não há residentes no " + (floor + 1) + "º andar!");
     }
 
     return s.getStr();
@@ -246,7 +246,7 @@ public class Building implements IOAble{
     if(s.getStr().length() > 0){
       s.setStr(s.getStr().trim().substring(0, s.getStr().trim().length() - 1));
     }else{
-      System.out.println("There are no residents " + ((hasGar) ? "with" : "without") + " garage!");
+      System.out.println("Não há residentes " + ((hasGar) ? "com" : "sem") + " garagem!");
     }
     return s.getStr();
   }

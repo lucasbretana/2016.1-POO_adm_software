@@ -68,13 +68,13 @@ public class Resident extends Taxpayer implements IOResident{
   public void chargeBill(BillPerApartment b){
     // System.out.println("I'm " + this.getName().split(" ")[0] + ", \tand I receive my bill on total of " + String.format( "%.2f", b.getTotal()) + " from month " + b.getMonth() + "\ton apartment " + this.getApartment() + ((this.hasGarage()) ? "\t with\t" : "\t without") + " \tgarage!");
     System.out.println("################################################################################");
-    System.out.println("###\t### " + this.getName().split(" ")[0].toUpperCase() + " on " + this.getApartment() + " ###\t###");
+    System.out.println("###\t### " + this.getName().split(" ")[0].toUpperCase() + " apt. " + this.getApartment() + " ###\t###");
     System.out.println("###\t### " + b.getMonth().toUpperCase());
     System.out.println("########");
-    System.out.println("Building total is: \tR$\t" + String.format("%.2f", b.getFullTotal()));
-    System.out.println("Apartments: \t\t" + this.building.getNumOccupiedApartments() + " / "+ this.building.getTotalApartments());
-    System.out.println("Admin: \t\t\t+ R$\t" + String.format("%.2f", b.getAdmin()));
-    System.out.println("Garage: \t\t+ R$\t" + String.format("%.2f", b.getGarage()));
+    System.out.println("Total do prédio: \tR$\t" + String.format("%.2f", b.getFullTotal()));
+    System.out.println("Apartamentos: \t\t" + this.building.getNumOccupiedApartments() + " / "+ this.building.getTotalApartments());
+    System.out.println("Taxa Adm.: \t\t+ R$\t" + String.format("%.2f", b.getAdmin()));
+    System.out.println("Taxa Garagem: \t\t+ R$\t" + String.format("%.2f", b.getGarage()));
     System.out.println("########\t\t _____________");
     System.out.println("TOTAL: \t\t\t= R$\t" + String.format( "%.2f", b.getTotal()));
     System.out.println("################################################################################");
