@@ -18,9 +18,7 @@ public class Bill implements IOBill{
 
 /**
  * Constructor method, creates a bill using the information from a file
- * @method Bill
  * @param  desc is the file that descrives the bill it self
- * @return   an instance  os Bill
  * @throws IllegalArgumentException when the file that decrive the Bill is not valid
  */
   public Bill(File desc) throws IllegalArgumentException{
@@ -67,7 +65,6 @@ public class Bill implements IOBill{
 
   /**
    * Gets the month from memory
-   * @method getMonth
    * @return the month if this bill
    */
   public String getMonth(){
@@ -75,9 +72,8 @@ public class Bill implements IOBill{
   }
   /**
    * Change the month name
-   * @method setMonth
    * @param  m is the new name of the month
-   * @IllegalArgumentException if the new month name is not valid
+   * @throws IllegalArgumentException if the new month name is not valid
    */
   public void setMonth(String m) throws IllegalArgumentException{
     if(m.trim().equalsIgnoreCase("")){
@@ -87,15 +83,14 @@ public class Bill implements IOBill{
   }
   /**
    * Returns the water value
-   * @method getWater
-   * @return [description]
+   * @return the water bill value
    */
   public Float getWater(){
     return this.water;
   }
 
   /**
-   * @method getEnergy
+   * Returns the energy value
    * @return energy bill value
    */
   public Float getEnergy(){
@@ -104,7 +99,7 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of water bill
-	* @param the nem water bill value
+	* @param water the nem water bill value
 	*/
 	public void setWater(Float water) {
 		this.water = water;
@@ -112,7 +107,7 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of energy bill
-	* @param the new value for energy
+	* @param energy the new value for energy
 	*/
 	public void setEnergy(Float energy) {
 		this.energy = energy;
@@ -127,7 +122,7 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of gas
-	* @param the new value of gas bill
+	* @param gas the new value of gas bill
 	*/
 	public void setGas(Float gas) {
 		this.gas = gas;
@@ -142,7 +137,7 @@ public class Bill implements IOBill{
 
 	/**
 	* Sets new value of lobby
-	* @param the lobby bill value
+	* @param lobby the lobby bill value
 	*/
 	public void setLobby(Float lobby) {
 		this.lobby = lobby;

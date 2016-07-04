@@ -4,7 +4,6 @@ import edu.poo.build.Building;
 import edu.poo.build.Apartment;
 import java.io.File;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class BillPerApartment{
   private Double garage = new Double(0);
@@ -22,7 +21,6 @@ public class BillPerApartment{
 
   /**
    * Gets the month from memory
-   * @method getMonth
    * @return the month if super bill
    */
   public String getMonth(){
@@ -31,15 +29,13 @@ public class BillPerApartment{
 
   /**
    * Returns the water value
-   * @method getWater
-   * @return [description]
+   * @return the water bill value
    */
   public Float getWater(){
     return base.getWater() / this.place.getBuilding().getNumOccupiedApartments();
   }
 
   /**
-   * @method getEnergy
    * @return energy bill value
    */
   public Float getEnergy(){
@@ -70,7 +66,7 @@ public class BillPerApartment{
   /**
    * Sums up all the bills, for this apartment
    * @return a sum of the bills, without the admin neither the garage taxes
-   * @see getTotal
+   * @{link  getTotal()}
    */
   private Double getSum(){
     return new Double(this.base.getSum() / this.place.getBuilding().getNumOccupiedApartments());
@@ -84,6 +80,10 @@ public class BillPerApartment{
     return getSum() + getAdmin() + getGarage();
   }
 
+  /**
+   * Gets the total of the bill
+   * @return the sum of this bills
+   */
   public Double getFullTotal(){
     return this.base.getSum();
   }

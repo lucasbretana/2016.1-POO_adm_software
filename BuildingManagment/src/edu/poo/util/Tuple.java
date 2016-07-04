@@ -8,7 +8,7 @@ public class Tuple<T, E extends Comparable<E>> implements Comparable<Tuple<T,E>>
 
   /**
   * Returns value of e
-  * @return
+  * @return the E value from this tuple, is the second parameter on constructor
   */
   public E getE() {
     return this.e;
@@ -16,7 +16,7 @@ public class Tuple<T, E extends Comparable<E>> implements Comparable<Tuple<T,E>>
 
   /**
   * Sets new value of t
-  * @param
+  * @param t is the new parameter for the t value, type is T, the first type paramter
   */
   public void setT(T t) {
     this.t = t;
@@ -24,17 +24,25 @@ public class Tuple<T, E extends Comparable<E>> implements Comparable<Tuple<T,E>>
 
   /**
   * Sets new value of e
-  * @param
+  * @param e is the new paramter for the e value, type is E, the second type parameter
   */
   public void setE(E e) {
     this.e = e;
   }
 
+  /**
+   * Default constructor
+   */
   public Tuple(T t, E e){
     this.t = t;
     this.e = e;
   }
 
+  /**
+  * Is the mothod override from the Comparable interface.
+  * @param tup is the paramter to compare
+  * @return the return value is 0 if this instance is equals to the paramter. Smaller than if it is smaller than the parameter and positivo otherwise.
+  */
   @Override
   public int compareTo(Tuple<T,E> tup){
     return this.getE().compareTo(tup.getE());
@@ -42,7 +50,7 @@ public class Tuple<T, E extends Comparable<E>> implements Comparable<Tuple<T,E>>
 
 	/**
 	* Returns value of t
-	* @return
+	* @return the T value from this tuple, is the first paramter on constructor
 	*/
 	public T getT() {
 		return this.t;

@@ -14,6 +14,7 @@ public class Main{
   public static void main(String []args){
     int op = 5;
     Building b = new Building("Por do Sol", new File(IOAble.LOCATION + "AllAccount" + IOAble.EXTENSION));
+    Scanner entry = new Scanner(System.in);
     while(op != 0){
       System.out.println("0 -- Sair");
       System.out.println("1 -- Incluir morador");
@@ -22,7 +23,6 @@ public class Main{
       System.out.println("4 -- Listar moradores por apartmento");
       System.out.println("5 -- Listar moradores com garagem");
       System.out.println("6 -- Nova conta");
-      Scanner entry = new Scanner(System.in);
       op = entry.nextInt();
       switch (op) {
         case 1: addResident(b);
@@ -45,6 +45,7 @@ public class Main{
         default: System.out.println("Inválido!");
       }
     }
+    entry.close();
   }
 
   protected static void addResident(Building b){
@@ -65,6 +66,7 @@ public class Main{
       System.err.println("The file does not exists!" + ilEx.getMessage().toString());
       addResident(b);
     }finally{
+      s.close();
       s = null;
       res = null;
       f = null;
@@ -88,6 +90,7 @@ public class Main{
     }catch(RemoveException rmEx){
       System.out.println("This resident cannot be removed!\n" + rmEx.getMessage().toString());
     }finally{
+      s.close();
       s = null;
       res = null;
       s = null;
@@ -105,6 +108,7 @@ public class Main{
       System.err.println("This floor is not valid!" + ilEx.getMessage().toString());
       listByFloor(b);
     }finally{
+      s.close();
       s = null;
       System.gc();
     }
@@ -120,6 +124,7 @@ public class Main{
       System.err.println("This apartmetn number is not valid!\n" + ilEx.getMessage().toString());
       listByApartment(b);
     }finally{
+      s.close();
       s = null;
       System.gc();
     }
@@ -144,6 +149,7 @@ public class Main{
       System.err.println(ilEx.getMessage().toString());
       chargeBill(b);
     }finally{
+      s.close();
       s = null;
       bill = null;
       a = null;

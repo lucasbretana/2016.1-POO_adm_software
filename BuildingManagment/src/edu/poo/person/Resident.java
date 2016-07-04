@@ -17,9 +17,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 /**
  * Constructor method, creates a resident using the information from a file
- * @method Resident
  * @param  desc     file that contains the resident information
- * @return          a instance of Resident class
  */
   public Resident(File desc, Building b) throws IllegalArgumentException, NullPointerException{
     if( desc == null ) throw new NullPointerException("The file used to create a resident is null!");
@@ -62,7 +60,6 @@ public class Resident extends Taxpayer implements IOResident{
 
 /**
  * Tell this resident about a new conjunt of bill that has to be paid
- * @method charge
  * @param  b          the conjunt of bills that has to be paid
  */
   public void chargeBill(BillPerApartment b){
@@ -82,7 +79,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Returns value of apartment
-	* @return
+	* @return the apartment number
 	*/
 	public Short getApartment() {
 		return apartment;
@@ -121,7 +118,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Sets new value of apartment
-	* @param
+	* @param apartment the apartment number
 	*/
 	public void setApartment(Short apartment) {
 		this.apartment = apartment;
@@ -129,7 +126,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Returns value of name
-	* @return
+	* @return the name
 	*/
 	public String getName() {
 		return name;
@@ -179,7 +176,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Returns value of garage
-	* @return
+	* @return the information about having or not a garage
 	*/
 	public Boolean hasGarage() {
 		return garage;
@@ -220,7 +217,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Sets new value of garage
-	* @param
+	* @param garage the info about having or not a garage
 	*/
 	public void setGarage(Boolean garage) {
 		this.garage = garage;
@@ -228,7 +225,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Returns value of description
-	* @return
+	* @return the file that descrives this resident
 	*/
 	public File getDescription() {
 		return description;
@@ -236,7 +233,7 @@ public class Resident extends Taxpayer implements IOResident{
 
 	/**
 	* Sets new value of description
-	* @param
+	* @param description is the file that descrives this resident
 	*/
 	public void setDescription(File description) {
 		this.description = description;

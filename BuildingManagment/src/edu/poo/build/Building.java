@@ -31,9 +31,7 @@ public class Building implements IOAble{
 
   /**
    * Constructor method, creates a nFloorsxnAparAndar matrix, that simulating a building, using the default name
-   * @method Building
    * @param f         the to read and write the report about the months
-   * @return          an instance of building
    */
   @Deprecated
   public Building(File f){
@@ -45,10 +43,8 @@ public class Building implements IOAble{
 
   /**
    * Constructor method, creates a nFloorsxnAparAndar matrix, that simulating a building, using the giving name
-   * @method Building
    * @param name      the name of the buidling
    * @param f         the to read and write the report about the months
-   * @return          an instance of building
    */
   public Building(String name, File f) throws NullPointerException{
     this(f);
@@ -59,24 +55,31 @@ public class Building implements IOAble{
   }
 
   /**
-   * @method getName
+   * Gets the name of the building
    * @return return the name os the building
    */
   public String getName(){
     return this.name;
   }
 
+   /**
+    * Gets how many of the apartments are occupied.
+    * @return the number of occupied apartment
+    */
   public Short getNumOccupiedApartments(){
     return this.numOccupiedApartments;
   }
 
+   /**
+    * Gets the total of aparments on this building.
+    * @return how many apartments are on this building
+    */
   public Short getTotalApartments(){
     return new Integer(this.nFloors * this.nAparAndar).shortValue();
   }
 
   /**
    * Creates and adds to the bulding a new apartment
-   * @method addApartment
    * @param floor         is the floor where it should add the new apartment
    * @param num           is the number of the apartment on that floor
    * @param res           is the resident (the first) that lives on that apartment
@@ -88,7 +91,6 @@ public class Building implements IOAble{
 
   /**
    * Remove all resident from the apartment and them remove the apartment is self.
-   * @method removeApartment
    * @param  floor          the floor of the apartment to be removed
    * @param num             the number, on the floor, of the apartment to be removed
    * @throws NullPointerException if there is no apartment instanced with those numbers (floor and num)
@@ -116,7 +118,6 @@ public class Building implements IOAble{
 
   /**
    * Remove a resident from it's apartment. If there is no one else on the apartment after the removal, then remove also the apartment.
-   * @method removeResident
    * @param  res            the resident to be removed
    * @throws IllegalArgumentException if the floor or the num are not valid
    */
@@ -147,9 +148,8 @@ public class Building implements IOAble{
   /**
    * Add a new resident to it's apartment, if it is the first resident, then also creates the new apartment
    * The information about the number and floor of the apartment is in the resident object
-   * @method addResident
    * @param  res         the resident that should be added to the apartment
-   * @see addApartment
+   * @link #addApartment}
    */
   public void addResident(Resident res){
     short floor = (short) (res.getApartment() / 100); // -> 104 / 100 = 1,04 => 1
@@ -164,10 +164,7 @@ public class Building implements IOAble{
   }
 
   /**
-   * Send a request of bill to all the residents on each apartment.
-   * Calls the doAccounting passing bill.
-   * Calls the doReportOfMonths passing bill.
-   * @method sendBill
+   * Send a request of bill to all the residents on each apartment. Calls the doAccounting passing bill.  Calls the doReportOfMonths passing bill.
    * @param  bill     the bill that has to be charged
    */
   public void sendBill(Bill bill){
@@ -186,8 +183,8 @@ public class Building implements IOAble{
 
   /**
    * Show all the residents thar live on a specific apartment
-   * @method listResidentsByFloor
    * @param  floor         the floor to show the residents
+   * @return A comma separeted string with the residents name.
    */
   public String listResidentsByFloor(short floor) throws IllegalArgumentException{
     if((floor < 1) || (floor > this.nFloors))
@@ -209,8 +206,8 @@ public class Building implements IOAble{
 
   /**
    * Show all the residents thar live on a specific apartment number.
-   * @method listResidentsByApartNumber
    * @param  ap            the apartment number to list the residents
+   * @return A comma separeted string with the residents name.
    */
   public String listResidentsByApartNumber(short ap) throws NullPointerException{
     Short floor = (short) (ap / 100);
@@ -236,8 +233,8 @@ public class Building implements IOAble{
 
   /**
    * Show all the residents that has ou not a garage, dependes on the paramter
-   * @method listResidents
    * @param  hasGar        if it is true, then show the residents that have a garage else show the ones that doesn't have
+   * @return A comma separeted string with the residents name.
    */
   public String listResidents(boolean hasGar){
     MyString s = new MyString(new String(""));
@@ -252,13 +249,10 @@ public class Building implements IOAble{
   }
 
   /**
-   * Shows the apartment contability for an specific bill/month.
-   * This will creates a file it the month of the bill and a small report
-   * @method doAccount
+   * Shows the apartment contability for an specific bill/month. This will creates a file it the month of the bill and a small report
    * @param  b         the bill to calculate incoming, outcoming and also the profit
    */
   private void doAccounting(Bill b){
-    // System.out.println("R$ " + String.format("%.2f", this.totInc - this.totOut) + "");
     try(BufferedWriter accountFile = new BufferedWriter(new FileWriter(new File(IOAble.LOCATION + b.getMonth() + IOAble.EXTENSION )))){
       accountFile.write(b.getMonth().toUpperCase() + "\n");
       accountFile.write("Inc: R$ " +  String.format("%.2f", this.totInc) + "\n");
@@ -273,9 +267,7 @@ public class Building implements IOAble{
   }
 
   /**
-   * Creates a report about the monthsbills with they respectives amount of collection.
-   * The lines will be order with the amount of collection in that month.
-   * @method doReportOfMonths
+   * Creates a report about the monthsbills with they respectives amount of collection. The lines will be order with the amount of collection in that month.
    * @param  b                the bill added
    */
   private void doReportOfMonths(Bill b){

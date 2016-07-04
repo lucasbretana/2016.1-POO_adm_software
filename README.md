@@ -5,17 +5,20 @@
   - compare and sort the months with the incomings
  --------------------------------------------------------------------------------
 # FOLDERS in root directory
-  - src
-    * the code it self, divide by the packages folders
+  - BuildingManagement/
+    - src/
+      * the code it self, divide by the packages folders
 
-  - bin
-    * only binaries, as .jar and .class files
+    - bin/
+      * only binaries, as .jar and .class files
 
-  - doc
-    * .html files generate only by the JavaDoc
+    - doc/
+      * .html files generate only by the JavaDoc
 
-  - TestesGerais
-    * code from general tests
+    - extra/
+      * the files that are read and/or write by the application, divite by subfolders
+      - Bills/
+        * contains the Bills file, respecting the model
 
   - LICENSE
     * github file about the license of the project
@@ -32,4 +35,7 @@
 
 # For generate the doc files
 	$ javadoc src/*/.java -d doc
+
+# For generate the jar file
+  $ jar cmvf META-INF/MANIFEST.MF app.jar  edu/poo/*
 --------------------------------------------------------------------------------
