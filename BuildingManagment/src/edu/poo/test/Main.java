@@ -22,7 +22,6 @@ public class Main{
       System.out.println("4 -- Listar moradores por apartmento");
       System.out.println("5 -- Listar moradores com garagem");
       System.out.println("6 -- Nova conta");
-      System.out.println("7 -- Sair");
       Scanner entry = new Scanner(System.in);
       op = entry.nextInt();
       switch (op) {
