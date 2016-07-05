@@ -12,4 +12,4 @@
 hs_err_pid*
 
 # Output
-extra/Output/*.txt
+BuildingManagment/extra/Output/*.txt

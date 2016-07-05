@@ -177,6 +177,21 @@ public class Building implements IOAble{
         this.totInc += b.getTotal();
       });
     this.totOut = bill.getSum();
+
+    File outDir = new File(this.monthlyBillFile.getPath().replaceFirst(this.monthlyBillFile.getName(), ""));
+    if(!outDir.exists()){
+      System.out.println("Creating the folder " + outDir.getPath() + " for the file "+ this.monthlyBillFile.getName());
+      try{
+        outDir.mkdir();
+      }catch(SecurityException secEx){
+        System.err.println("Could not create the folder " + outDir.getPath() + " for the file "+ this.monthlyBillFile.getName());
+        secEx.printStackTrace();
+        return;
+      }finally{
+        System.gc();
+      }
+    }
+
     this.doAccounting(bill);
     this.doReportOfMonths(bill);
     this.totInc = new Double(0);
@@ -261,7 +276,7 @@ public class Building implements IOAble{
       accountFile.write("Out: R$ " +  String.format("%.2f", this.totOut) + "\n");
       accountFile.write("Pro: R$ " + String.format("%.2f", this.totInc - this.totOut) + "\n");
     }catch(IOException ioEx){
-      System.out.println("Could not create the file " + b.getMonth());
+      System.err.println("Could not create the file " + b.getMonth());
       ioEx.printStackTrace();
     }finally{
       System.gc();
@@ -288,7 +303,7 @@ public class Building implements IOAble{
           months.add(new Tuple<String,Float>(month, number));
         }
       }catch(IOException ioEx){
-        System.out.println("Could not create the file " + this.monthlyBillFile.getName());
+        System.err.println("Could not create the file " + this.monthlyBillFile.getName());
         ioEx.printStackTrace();
         line = null;
         num = null;
@@ -330,7 +345,7 @@ public class Building implements IOAble{
         }
       });
     }catch(IOException ioEx){
-      System.out.println("Could not open the file " + this.monthlyBillFile.getName());
+      System.err.println("Could not open the file " + this.monthlyBillFile.getName());
       ioEx.printStackTrace();
     }finally{
       System.gc();
