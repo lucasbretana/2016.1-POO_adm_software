@@ -37,6 +37,6 @@
 	$ javadoc src/*/.java -d doc
 
 # For generate the jar file
-  $ jar cmvf META-INF/MANIFEST.MF app.jar  edu/poo/\*
+  	$ jar cmvf META-INF/MANIFEST.MF app.jar  edu/poo/\*
 
 --------------------------------------------------------------------------------
